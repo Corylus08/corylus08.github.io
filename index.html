@@ -1,10 +1,185 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Minha Organização</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toggle Grid</title>
+  <style>
+    /* ── Tokens de cor ──────────────────────────────────── */
+    :root {
+      --bg:           #100a1c;
+      --surface:      #1e1530;
+      --surface-on:   #2e2050;
+      --border:       #3a2d5a;
+      --border-on:    #7c5cbf;
+      --accent:       #9b6dff;
+      --accent-glow:  #7c5cbf55;
+      --text-title:   #e8deff;
+      --text-sub:     #9585bb;
+      --text-on:      #ffffff;
+      --radius:       18px;
+    }
+
+    /* ── Reset & base ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: var(--text-title);
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+    }
+
+    /* ── Grid ───────────────────────────────────────────── */
+    /*
+      Para adicionar mais botões: inclua mais <button> no HTML.
+      A grid se ajusta automaticamente em colunas de ~160px.
+    */
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* ← mude "2" para o nº de colunas desejado */
+      gap: 1.25rem;
+      width: min(100%, 420px);
+    }
+
+    /* ── Botão toggle ───────────────────────────────────── */
+    .toggle-btn {
+      aspect-ratio: 1 / 1;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 1.25rem;
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.15s ease;
+      user-select: none;
+    }
+
+    .toggle-btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .toggle-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Estado: ligado */
+    .toggle-btn.on {
+      background: var(--surface-on);
+      border-color: var(--border-on);
+      box-shadow: 0 0 18px var(--accent-glow), inset 0 0 12px var(--accent-glow);
+    }
+
+    .toggle-btn.on .btn-title {
+      color: var(--accent);
+    }
+
+    .toggle-btn.on .btn-sub {
+      color: var(--text-on);
+      opacity: 0.75;
+    }
+
+    /* Textos */
+    .btn-title {
+      color: var(--text-title);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      transition: color 0.25s ease;
+      text-align: center;
+    }
+
+    .btn-sub {
+      color: var(--text-sub);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
+
+    /* Indicador de status */
+    .btn-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      margin-bottom: 0.2rem;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .toggle-btn.on .btn-dot {
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+  </style>
 </head>
 <body>
-  <h1>Bem-vindo à nossa organização!</h1>
+
+  <h1>Painel de Controle</h1>
+
+  <!--
+    COMO EXPANDIR:
+    - Adicione mais <button class="toggle-btn"> dentro de .toggle-grid
+    - Ajuste grid-template-columns no CSS se quiser mais colunas
+  -->
+  <div class="toggle-grid">
+
+    <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
+      <div class="btn-dot"></div>
+      <span class="btn-title">Luzes</span>
+      <span class="btn-sub">Sala de estar</span>
+    </button>
+
+    <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
+      <div class="btn-dot"></div>
+      <span class="btn-title">Música</span>
+      <span class="btn-sub">Playlist do dia</span>
+    </button>
+
+    <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
+      <div class="btn-dot"></div>
+      <span class="btn-title">Alarme</span>
+      <span class="btn-sub">06:30 da manhã</span>
+    </button>
+
+    <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
+      <div class="btn-dot"></div>
+      <span class="btn-title">Wi-Fi</span>
+      <span class="btn-sub">Rede doméstica</span>
+    </button>
+
+  </div>
+
+  <script>
+    function toggle(btn) {
+      const isOn = btn.classList.toggle('on');
+      btn.setAttribute('aria-pressed', isOn);
+    }
+  </script>
+
 </body>
 </html>
