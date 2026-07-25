@@ -120,22 +120,6 @@
       transition: color 0.25s ease, opacity 0.25s ease;
     }
 
-    /* Indicador de status — canto superior esquerdo */
-    .btn-dot {
-      position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background: var(--border);
-      transition: background 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .toggle-btn.on .btn-dot {
-      background: var(--accent);
-      box-shadow: 0 0 6px var(--accent);
-    }
   </style>
 </head>
 <body>
@@ -145,37 +129,31 @@
   <div class="toggle-grid">
 
     <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
-      <div class="btn-dot"></div>
       <span class="btn-title">Começou o Role</span>
       <span class="btn-sub">Todos se saúdam 🤝</span>
     </button>
 
     <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
-      <div class="btn-dot"></div>
       <span class="btn-title">Relembrar passado do Christian</span>
       <span class="btn-sub">Christian bebe 🍺</span>
     </button>
 
     <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
-      <div class="btn-dot"></div>
       <span class="btn-title">Falaram do Marlon</span>
       <span class="btn-sub">Quem falou 1º, bebe 🍺</span>
     </button>
 
     <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
-      <div class="btn-dot"></div>
       <span class="btn-title">Falaram da Ex do Avila</span>
       <span class="btn-sub">Todos Bebem 🍺</span>
     </button>
 
     <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
-      <div class="btn-dot"></div>
       <span class="btn-title">Piada com Minoria</span>
       <span class="btn-sub">Quem riu, bebe 🍺</span>
     </button>
 
     <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
-      <div class="btn-dot"></div>
       <span class="btn-title">Momento Conversa Séria</span>
       <span class="btn-sub">é sério, ninguém bebe, todos refletem</span>
     </button>
