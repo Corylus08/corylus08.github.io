@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bingo do Role</title>
   <style>
-    /* ── Tokens de cor ──────────────────────────────────── */
     :root {
       --bg:           #100a1c;
       --surface:      #1e1530;
@@ -20,7 +19,6 @@
       --radius:       18px;
     }
 
-    /* ── Reset & base ───────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -43,7 +41,6 @@
       opacity: 0.85;
     }
 
-    /* ── Grid ───────────────────────────────────────────── */
     .toggle-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -51,7 +48,6 @@
       width: min(100%, 420px);
     }
 
-    /* ── Botão toggle ───────────────────────────────────── */
     .toggle-btn {
       aspect-ratio: 1 / 1;
       background: var(--surface);
@@ -60,11 +56,10 @@
       cursor: pointer;
       position: relative;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.45rem;
       padding: 1.25rem;
+      padding-bottom: 2.25rem; /* espaço para o btn-sub no rodapé */
       transition:
         background 0.25s ease,
         border-color 0.25s ease,
@@ -84,7 +79,6 @@
       transform: scale(0.96);
     }
 
-    /* Estado: ligado */
     .toggle-btn.on {
       background: var(--surface-on);
       border-color: var(--border-on);
@@ -100,7 +94,7 @@
       opacity: 0.75;
     }
 
-    /* Textos */
+    /* Título — centralizado no meio do botão pelo flexbox */
     .btn-title {
       color: var(--text-title);
       font-size: 1.05rem;
@@ -110,15 +104,19 @@
       text-align: center;
     }
 
+    /* Subtítulo — ancorado no rodapé do botão */
     .btn-sub {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 1rem;
+      right: 1rem;
       color: var(--text-sub);
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 400;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       text-align: center;
       transition: color 0.25s ease, opacity 0.25s ease;
     }
-
   </style>
 </head>
 <body>
@@ -154,7 +152,7 @@
 
     <button class="toggle-btn" onclick="toggle(this)" aria-pressed="false">
       <span class="btn-title">Momento Conversa Séria</span>
-      <span class="btn-sub">é sério, ninguém bebe, todos refletem</span>
+      <span class="btn-sub">É sério, ninguém bebe, todos refletem</span>
     </button>
 
   </div>
