@@ -59,7 +59,7 @@
       align-items: center;
       justify-content: center;
       padding: 1.25rem;
-      padding-bottom: 2.25rem; /* espaço para o btn-sub no rodapé */
+      padding-bottom: 2.25rem;
       transition:
         background 0.25s ease,
         border-color 0.25s ease,
@@ -94,7 +94,6 @@
       opacity: 0.75;
     }
 
-    /* Título — centralizado no meio do botão pelo flexbox */
     .btn-title {
       color: var(--text-title);
       font-size: 1.05rem;
@@ -104,7 +103,6 @@
       text-align: center;
     }
 
-    /* Subtítulo — ancorado no rodapé do botão */
     .btn-sub {
       position: absolute;
       bottom: 0.75rem;
@@ -116,6 +114,48 @@
       letter-spacing: 0.04em;
       text-align: center;
       transition: color 0.25s ease, opacity 0.25s ease;
+    }
+
+    /* ── Botão Copiar ───────────────────────────────────── */
+    .copy-btn {
+      width: min(100%, 420px);
+      height: calc((min(100vw - 4rem, 420px) / 2 - 0.625rem) / 2); /* metade da altura dos toggles */
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      color: var(--text-title);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+
+    .copy-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.98);
+    }
+
+    .copy-btn.copied {
+      background: var(--surface-on);
+      border-color: var(--border-on);
+      box-shadow: 0 0 18px var(--accent-glow);
+      color: var(--accent);
     }
   </style>
 </head>
@@ -157,10 +197,37 @@
 
   </div>
 
+  <button class="copy-btn" onclick="copiarResultado(this)">Copiar Resultado</button>
+
   <script>
     function toggle(btn) {
       const isOn = btn.classList.toggle('on');
       btn.setAttribute('aria-pressed', isOn);
+    }
+
+    function copiarResultado(btn) {
+      const hoje = new Date();
+      const dia  = String(hoje.getDate()).padStart(2, '0');
+      const mes  = String(hoje.getMonth() + 1).padStart(2, '0');
+      const ano  = hoje.getFullYear();
+
+      const botoes = document.querySelectorAll('.toggle-btn');
+      const linhas = [`Bingo do Role dia ${dia}/${mes}/${ano}`, ''];
+
+      botoes.forEach(b => {
+        const titulo = b.querySelector('.btn-title').textContent.trim();
+        const on     = b.classList.contains('on');
+        linhas.push(`${on ? '✅' : '❌'} ${titulo}`);
+      });
+
+      navigator.clipboard.writeText(linhas.join('\n')).then(() => {
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copiar Resultado';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
     }
   </script>
 
