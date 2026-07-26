@@ -28,7 +28,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start; /* ← topo */
+      justify-content: flex-start;
       font-family: 'Segoe UI', system-ui, sans-serif;
       gap: 2rem;
       padding: 2rem;
@@ -46,7 +46,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
-      width: min(100%, 420px);
+      width: min(100%, 600px);
     }
 
     .toggle-btn {
@@ -97,7 +97,7 @@
 
     .btn-title {
       color: var(--text-title);
-      font-size: 1.05rem;
+      font-size: 0.85rem;
       font-weight: 800;
       letter-spacing: 0.03em;
       transition: color 0.25s ease;
@@ -107,10 +107,10 @@
     .btn-sub {
       position: absolute;
       bottom: 0.75rem;
-      left: 1rem;
-      right: 1rem;
+      left: 0.75rem;
+      right: 0.75rem;
       color: var(--text-sub);
-      font-size: 0.68rem;
+      font-size: 0.6rem;
       font-weight: 400;
       letter-spacing: 0.04em;
       text-align: center;
@@ -118,8 +118,8 @@
     }
 
     .copy-btn {
-      width: min(100%, 420px);
-      height: calc((min(100vw - 4rem, 420px) / 2 - 0.625rem) / 4);
+      width: min(100%, 600px);
+      height: calc((min(100vw - 4rem, 600px) / 3 - 0.85rem) / 4);
       background: var(--surface);
       border: 2px solid var(--border);
       border-radius: var(--radius);
